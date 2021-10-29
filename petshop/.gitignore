@@ -40,3 +40,4 @@ maven-wrapper.jar
 maven-wrapper.properties
 application.properties
 .mvn
+.vscode

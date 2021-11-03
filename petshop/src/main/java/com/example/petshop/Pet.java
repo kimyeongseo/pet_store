@@ -23,18 +23,39 @@ public abstract class Pet {
                 throw new IllegalArgumentException("Energy change is too big");
         }
 
-    public void eat(){
-        energy++;
-
-        if(listeners!=null){
-            for(int i = 0; i<listeners.size(); i++){
-                    listeners.get(i).energyChanged(energy);
+        public void eat(){
+            energy++;
+    
+            if(listeners!=null){
+                for(int i = 0; i<listeners.size(); i++){
+                        listeners.get(i).energyChanged(energy);
+                }
             }
         }
-    }
-
-    public String toString(){
-        return "<a href='./"+this.getClass().getSimpleName().toLowerCase()+"'"+ ">" + this.getClass().getSimpleName() + "</a>";
+    
+        public void sleep(){
+            energy += 3;
+    
+            if(listeners!=null){
+                for(int i = 0; i<listeners.size(); i++){
+                        listeners.get(i).energyChanged(energy);
+                }
+            }
+        }
+    
+        public void groom(){
+            energy += 2;
+    
+            if(listeners!=null){
+                for(int i = 0; i<listeners.size(); i++){
+                        listeners.get(i).energyChanged(energy);
+                }
+            }
+        }
+    
+        public String toString(){
+            return "<a href='./"+this.getClass().getSimpleName().toLowerCase()+"'"+ ">" + this.getClass().getSimpleName() + "</a>";
+        }
+        
     }
     
-}

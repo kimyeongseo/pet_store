@@ -13,6 +13,5 @@ public class FeedListener implements Listener {
         if(energy < feedCriteria){
             System.out.println("please feed some food.");
         }
-    }
-    
+    }   
 }

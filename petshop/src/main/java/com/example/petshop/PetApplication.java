@@ -15,19 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("pet")
 @EnableAspectJAutoProxy
 public class PetApplication {
-
 	static HashMap<String, Pet> pets = new HashMap<String, Pet>();
 
 	public static void main(String[] args) {
-
 		pets.put(Dog.class.getSimpleName().toLowerCase(), new Dog());
 		pets.put(Cat.class.getSimpleName().toLowerCase(), new Cat());
 
 		SpringApplication.run(PetApplication.class, args);
 	}
-
-
-
 	
 	@RequestMapping(method = RequestMethod.GET, path = "/")
 	public String listPets(){
@@ -55,7 +50,7 @@ public class PetApplication {
 		result.append("<br>3. <a href='"+petId+"/cart'> 입양하기 </a>");
 
 		if(thePet instanceof Groomable)
-			result.append("<br>3. <a href='"+ petId +"./groom'> 그루밍하기 </a>");
+			result.append("<br>4. <a href='"+ petId +"/groom'> 그루밍하기 </a>");
 
 			return result.toString();
 	}
@@ -66,33 +61,38 @@ Cart cart;
 
 @RequestMapping(method = RequestMethod.GET, path = "{petId}/cart")
 public String addToCart(@PathVariable(value = "petId") String petId) throws Exception{
-	//StringBuffer result = new StringBuffer();
 	Pet thePet = pets.get(petId);
 
 	cart.add(thePet);
 
-	return "성공적 입양<br>";
+	return "성공적 입양<br>" + cart;
 }
 
 	@RequestMapping(method = RequestMethod.GET, path = "/{petId}/feed")
 	public String feed(@PathVariable(value = "petId") String petId){
-		StringBuffer result = new StringBuffer();
 		Pet thePet = pets.get(petId);
 
 		thePet.eat();
 
-		return "맛있는 거 먹였습니다.";
+		return "냠냠 맛있다~!";
 	}
 
 
 	@RequestMapping(method = RequestMethod.GET, path = "/{petId}/groom")
 	public String groom(@PathVariable(value = "petId") String petId){
-		StringBuffer result = new StringBuffer();
 		Pet thePet = pets.get(petId);
 
-		thePet.eat();
+		thePet.groom();
 
-		return "맛있는 거 먹였습니다.";
+		return "야옹이 행복해~!";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, path = "/{petId}/sleep")
+	public String sleep(@PathVariable(value = "petId") String petId){
+		Pet thePet = pets.get(petId);
+
+		thePet.sleep();
+
+		return "잘 잤다~!";
 	}
 }
-
